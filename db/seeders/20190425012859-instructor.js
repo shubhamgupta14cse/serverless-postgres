@@ -1,7 +1,5 @@
 'use strict';
 
-const db = require('../../src/common/MySQLDBHandler');
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('instructors', [{

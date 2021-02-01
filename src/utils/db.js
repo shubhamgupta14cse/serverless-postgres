@@ -5,8 +5,6 @@ const Models = require('../models');
 
 const db = {};
 
-// workaround for meeting internal peer dependencies of sequelize during webpack packaging
-
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USERNAME,
