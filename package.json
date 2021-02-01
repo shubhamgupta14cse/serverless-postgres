@@ -1,0 +1,22 @@
+{
+  "name": "abiliyo-backend",
+  "version": "0.0.3",
+  "description": "The Serverless Backend for Abiliyo Web and Mobile Applications",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "src/*"
+  ],
+  "scripts": {
+    "docs": "apidoc -i services -e node_modules -e .webpack -o docs -t template"
+  },
+  "author": "Shubham Gupta <shubhamgupta11727@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "apidoc": "^0.25.0",
+    "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "lambda-hooks": "^0.2.1"
+  }
+}

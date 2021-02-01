@@ -1,0 +1,161 @@
+service: abiliyo-instructor-service
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: backend
+  memorySize: 1024
+  # timeout: 10
+
+  apiGateway:
+    minimumCompressionSize: 1024
+
+  stage: dev
+  region: ap-south-1
+
+  environment:
+    INSTRUCTOR_TABLE: ${file(../database/serverless.yml):custom.instructorTableName}
+    STUDENT_TABLE: ${file(../database/serverless.yml):custom.studentTableName}
+    CLASS_TABLE: ${file(../database/serverless.yml):custom.classTableName}
+    SESSION_TABLE: ${file(../database/serverless.yml):custom.sessionTableName}
+    DEMO_TABLE: ${file(../database/serverless.yml):custom.demoTableName}
+    HOMEWORK_TABLE: ${file(../database/serverless.yml):custom.homeworkTableName}
+    INSTRUCTOR_BUCKET: ${file(../upload/serverless.yml):custom.instructorBucketName}
+    STUDENT_BUCKET: ${file(../upload/serverless.yml):custom.studentBucketName}
+    CLASS_BUCKET: ${file(../upload/serverless.yml):custom.classBucketName}
+    HOMEWORK_BUCKET: ${file(../upload/serverless.yml):custom.homeworkBucketName}
+    JWT_SECRET: ${env:JWT_SECRET}
+    JWT_EXPIRATION_TIME: ${env:JWT_EXPIRATION_TIME}
+    NODE_ENV: ${env:NODE_ENV}
+    DB_DIALECT: ${env:DB_DIALECT}
+    DB_NAME: ${env:DB_NAME}
+    DB_USERNAME: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_HOST: ${env:DB_HOST}
+    DB_PORT: ${env:DB_PORT}
+
+  vpc:
+    securityGroupIds:
+      - ${env:SECURITY_GROUP_ID}
+    subnetIds:
+      - ${env:SUBNET1_ID}
+      - ${env:SUBNET2_ID}
+      - ${env:SUBNET3_ID}
+      - ${env:SUBNET4_ID}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+        - s3:*
+      Resource: "*"
+
+package:
+  individually: true
+
+plugins:
+  - serverless-webpack
+  - serverless-domain-manager
+  - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-sequelize-migrations
+
+custom:
+  domains:
+    prod: api.abiliyo.com
+    staging: staging-api.abiliyo.com
+    dev: dev-api.abiliyo.com
+
+  dotenv:
+    path: ../../.env
+
+  customDomain:
+    domainName: ${self:custom.domains.${self:provider.stage}}
+    stage: ${self:provider.stage}
+    basePath: "instructor"
+    certificateName: "*.abiliyo.com"
+    createRoute53Record: true
+    endpointType: "edge"
+    securityPolicy: tls_1_2
+    apiType: rest
+
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules:
+      forceInclude:
+        - pg
+        - pg-hstore
+        - pg-native
+  migrationsPath: '../../../db/migrations'
+
+functions:
+  authInstructor:
+    handler: src/auth.handler
+
+  registerInstructor:
+    handler: src/register.handler
+    events:
+      - http:
+          path: register
+          method: POST
+          cors: true
+  loginInstructor:
+    handler: src/login.handler
+    events:
+      - http:
+          path: login
+          method: POST
+          cors: true
+  getInstructor:
+    handler: src/get.handler
+    events:
+      - http:
+          path: get
+          method: GET
+  getInstructorPublic:
+    handler: src/getPublic.handler
+    events:
+      - http:
+          path: "{_id}"
+          method: GET
+          cors: true
+  getListings:
+    handler: src/list.handler
+    events:
+      - http:
+          path: list
+          method: GET
+          cors: true
+  updateInstructor:
+    handler: src/update.handler
+    events:
+      - http:
+          path: update
+          method: PUT
+          authorizer:
+            name: authInstructor
+            resultTtlInSeconds: 0
+          cors: true
+  # uploadInstructorFile:
+  #   handler: src/uploadFile.handler
+  #   events:
+  #     - http:
+  #         path: files/upload
+  #         method: PUT
+  #         authorizer:
+  #           name: authInstructor
+  #           resultTtlInSeconds: 0
+  #         cors: true
+  # getInstructorFile:
+  #   handler: src/getFile.handler
+  #   events:
+  #     - http:
+  #         path: files/get
+  #         method: PUT
+  #         authorizer:
+  #           name: authInstructor
+  #           resultTtlInSeconds: 0
+  #         cors: true
+
+resources:
+  - ${file(../../gateway-errors.yml)}

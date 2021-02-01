@@ -1,0 +1,140 @@
+service: abiliyo-upload-service
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  instructorBucketName: ${self:provider.stage}-abiliyo-instructor-bucket
+  studentBucketName: ${self:provider.stage}-abiliyo-student-bucket
+  classBucketName: ${self:provider.stage}-abiliyo-class-bucket
+  sessionBucketName: ${self:provider.stage}-abiliyo-session-bucket
+  homeworkBucketName: ${self:provider.stage}-abiliyo-homework-bucket
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: backend
+  stage: dev
+  region: ap-south-1
+
+resources:
+  Resources:
+    StudentBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.studentBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    InstructorBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.instructorBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    ClassBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.classBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    SessionBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.sessionBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+    HomeworkBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.homeworkBucketName}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+  Outputs:
+    StudentBucketArn:
+      Value:
+        Fn::GetAtt:
+          - StudentBucket
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-StudentBucketArn
+    InstructorBucketArn:
+      Value:
+        Fn::GetAtt:
+          - InstructorBucket
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-InstructorBucketArn
+    ClassBucketArn:
+      Value:
+        Fn::GetAtt:
+          - ClassBucket
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-ClassBucketArn
+    SessionBucketArn:
+      Value:
+        Fn::GetAtt:
+          - SessionBucket
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-SessionBucketArn
+    HomeworkBucketArn:
+      Value:
+        Fn::GetAtt:
+          - HomeworkBucket
+          - Arn
+      Export:
+        Name: ${self:custom.stage}-HomeworkBucketArn
