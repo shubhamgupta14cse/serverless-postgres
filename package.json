@@ -7,16 +7,24 @@
   "workspaces": [
     "src/*"
   ],
-  "scripts": {
-    "docs": "apidoc -i services -e node_modules -e .webpack -o docs -t template"
-  },
+  "scripts": {},
   "author": "Shubham Gupta <shubhamgupta11727@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "apidoc": "^0.25.0",
-    "lerna": "^3.22.1"
+    "aws-sdk": "^2.760.0",
+    "serverless-domain-manager": "^4.2.0",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-sequelize-migrations": "^1.1.1",
+    "webpack": "^4.44.2"
   },
   "dependencies": {
-    "lambda-hooks": "^0.2.1"
+    "lambda-hooks": "^0.2.1",
+    "pg": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.22.3",
+    "uuid": "^8.3.0",
+    "yup": "^0.29.3"
   }
 }

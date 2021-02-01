@@ -1,7 +1,4 @@
 const Sequelize = require('sequelize');
-// const {enum: {
-//   ADMINUSER_STATUS
-// }} = require('../../src/common/constant.json')
 
 module.exports = (sequelize) => {
   const Instructors = sequelize.define('instructors', {
@@ -50,11 +47,11 @@ module.exports = (sequelize) => {
         max: 4
       },
     },
-    createdAt: {
+    created_at: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
-    updatedAt: {
+    updated_at: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
@@ -64,7 +61,7 @@ module.exports = (sequelize) => {
     // if you don't want that, set the following
     freezeTableName: true,
     // don't add the timestamp attributes (updatedAt, createdAt)
-    timestamps: true,
+    timestamps: false,
     // Add soft delete/paranoid functionality
     paranoid: true
   });

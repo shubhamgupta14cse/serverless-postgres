@@ -15,7 +15,6 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    schema: 'abiliyo',
     pool: {
       max: 5,//Maximum number of connection in pool
       min: 0,//Minimum number of connection in pool

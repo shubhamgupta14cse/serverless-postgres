@@ -5,7 +5,9 @@ const { withHooks } = require("../../utils");
 
 module.exports.hello = withHooks(async (event, context) => {
   const { Models } = context;
-  console.log("This is the models ----------->", Models.Instructor)
+  console.log("This is the models ----------->", Models.Instructors)
+  const data = await Models.Instructors.findByPk(1);
+  console.log("This is the user ------------->", data)
   return {
     statusCode: 200,
     body: JSON.stringify(

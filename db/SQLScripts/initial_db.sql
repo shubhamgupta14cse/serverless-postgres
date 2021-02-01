@@ -412,31 +412,31 @@ CREATE TABLE solutions (
 
 -- TODO keep a average rating in session , offering and instructor and map the value from table defining unique relation with student such as order as between offering and student and student_session b/w student and session
 
-COMMENT 'The first name of the instructor'
-COMMENT 'The middle name of the instructor'
-COMMENT 'The last name of the instructor'
-COMMENT 'The primary email of the instructor'
-COMMENT 'Encoded instructor password'
-COMMENT 'The document/s3 link for the instructor profile pic'
-COMMENT 'The date when the row is created'
-COMMENT 'The date when the row is updated'
-
-COMMENT 'The name of the language'
-COMMENT 'The date when the row is created'
-COMMENT 'The date when the row is updated'
-
-COMMENT 'The compliment given along feedback'
-COMMENT 'The date when the row is created'
-COMMENT 'The date when the row is updated'
-
-COMMENT 'The first name of the skill'
-COMMENT 'The parent id of the skill to represent tree heriarchy'
-COMMENT 'The date when the row is created'
-COMMENT 'The date when the row is updated'
-
-COMMENT 'is this availability recurring'
-COMMENT 'The No of years of experience in online teaching'
-COMMENT 'The No of years of experience in offline teaching'
-COMMENT 'The class type(one2one, group or both) preference of the instructor for the skill'
-COMMENT 'The date when the row is created'
-COMMENT 'The date when the row is updated'
+-- COMMENT 'The first name of the instructor'
+-- COMMENT 'The middle name of the instructor'
+-- COMMENT 'The last name of the instructor'
+-- COMMENT 'The primary email of the instructor'
+-- COMMENT 'Encoded instructor password'
+-- COMMENT 'The document/s3 link for the instructor profile pic'
+-- COMMENT 'The date when the row is created'
+-- COMMENT 'The date when the row is updated'
+--
+-- COMMENT 'The name of the language'
+-- COMMENT 'The date when the row is created'
+-- COMMENT 'The date when the row is updated'
+--
+-- COMMENT 'The compliment given along feedback'
+-- COMMENT 'The date when the row is created'
+-- COMMENT 'The date when the row is updated'
+--
+-- COMMENT 'The first name of the skill'
+-- COMMENT 'The parent id of the skill to represent tree heriarchy'
+-- COMMENT 'The date when the row is created'
+-- COMMENT 'The date when the row is updated'
+--
+-- COMMENT 'is this availability recurring'
+-- COMMENT 'The No of years of experience in online teaching'
+-- COMMENT 'The No of years of experience in offline teaching'
+-- COMMENT 'The class type(one2one, group or both) preference of the instructor for the skill'
+-- COMMENT 'The date when the row is created'
+-- COMMENT 'The date when the row is updated'

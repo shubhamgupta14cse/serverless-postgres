@@ -14,16 +14,6 @@ provider:
   region: ap-south-1
 
   environment:
-    INSTRUCTOR_TABLE: ${file(../database/serverless.yml):custom.instructorTableName}
-    STUDENT_TABLE: ${file(../database/serverless.yml):custom.studentTableName}
-    CLASS_TABLE: ${file(../database/serverless.yml):custom.classTableName}
-    SESSION_TABLE: ${file(../database/serverless.yml):custom.sessionTableName}
-    DEMO_TABLE: ${file(../database/serverless.yml):custom.demoTableName}
-    HOMEWORK_TABLE: ${file(../database/serverless.yml):custom.homeworkTableName}
-    INSTRUCTOR_BUCKET: ${file(../upload/serverless.yml):custom.instructorBucketName}
-    STUDENT_BUCKET: ${file(../upload/serverless.yml):custom.studentBucketName}
-    CLASS_BUCKET: ${file(../upload/serverless.yml):custom.classBucketName}
-    HOMEWORK_BUCKET: ${file(../upload/serverless.yml):custom.homeworkBucketName}
     JWT_SECRET: ${env:JWT_SECRET}
     JWT_EXPIRATION_TIME: ${env:JWT_EXPIRATION_TIME}
     NODE_ENV: ${env:NODE_ENV}
@@ -46,7 +36,7 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:*
+        # - dynamodb:*
         - s3:*
       Resource: "*"
 
@@ -86,6 +76,7 @@ custom:
         - pg
         - pg-hstore
         - pg-native
+        
   migrationsPath: '../../../db/migrations'
 
 functions:
